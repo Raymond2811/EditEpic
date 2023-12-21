@@ -17,19 +17,22 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'text-editor',
+        title: 'PWA',
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
         name: 'EditEpic',
         short_name: 'EpicEd',
-        description: 'Your app description',
+        description: 'A simple PWA text editor',
         background_color: '#ffffff',
         theme_color: '#000000',
         start_url: '/',
-        publicPath: './',
-        crossorigin: 'use-credentials',
+        publicPath: '/',
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
@@ -37,10 +40,6 @@ module.exports = () => {
             destination: path.join('assets', 'icons'),
           },
         ],
-      }),
-      new InjectManifest({
-        swSrc: './src-sw.js',
-        swDest: 'service-worker.js',
       }),
     ],
 
